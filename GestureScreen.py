@@ -9,10 +9,10 @@ class GestureScreen(Frame):
         self.topFrame = parent
         self.activeSession = Frame(self)
         self.slideShowSession = Frame(self)
-        self.time = 59
+        self.time = 0
         self.timeM = 0
         self.timeS = 0
-        self.currentTime = StringVar(value="900:900")
+        self.currentTime = StringVar(value="00:00")
         self.setClock()
         self.images = 0
         self.completedImages=0
@@ -75,8 +75,8 @@ class GestureScreen(Frame):
         else:
             self.isActive = False
             self.slideShowSession.place(relx=0,relheight=1,relwidth=1)
-            self.maxIndex = self.images
-        self.maxIndex = min(self.maxIndex, self.images-1)
+            self.maxIndex = self.images-1
+        self.maxIndex = min(self.maxIndex, imgMan.getImageLen()-1)
         self.completedImages=0
         self.currentImage = -1
         self.nextImage()
@@ -186,7 +186,7 @@ class GestureScreen(Frame):
 
     def addMaxIndex(self):
         self.maxIndex+=1
-        self.maxIndex = min(self.maxIndex, self.images-1)
+        self.maxIndex = min(self.maxIndex, imgMan.getImageLen()-1)
 
     def bindExitSession(self,func):
         self.exitToMenu = func
